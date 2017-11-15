@@ -49,16 +49,16 @@ void paintWeather(int world_size);
 void consoleCursorGoToXY(int x, int y);
 void hidecursor();
 
-int main(){
+int main() {
 
 	//var
-	const unsigned int        world_size     = 80;
-	pj                        main_pj        = { 40, 3 };
-	int                       key	         = 0;
-	bool                      end_game       = false;
-	const int                 enemy_prob     = 25;
-	const int                 mush_prob      = 80;
-	const unsigned int        mush_points    = 100;
+	const unsigned int        world_size = 80;
+	pj                        main_pj = { 40, 3 };
+	int                       key = 0;
+	bool                      end_game = false;
+	const int                 enemy_prob = 25;
+	const int                 mush_prob = 80;
+	const unsigned int        mush_points = 100;
 	std::list<mushroom>	      mush_list;
 	std::list<enemy>	      enemy_list;
 	std::list<bullet>		  bullet_list;
@@ -69,7 +69,7 @@ int main(){
 	hidecursor();
 
 	printf("\n");
-	printf("\n"); 
+	printf("\n");
 	printf("\n");
 	printf("\n");
 	printf("\n");
@@ -81,24 +81,24 @@ int main(){
 		if (_kbhit()) {
 			key = _getch();
 			switch (key) {
-				case J_KEY:
-					if (main_pj.x > 0) {
-						main_pj.x--;
-					}
-					break;
-				case K_KEY:
-					if (main_pj.x < world_size - 1) {
-						main_pj.x++;
-					}
-					break;
-				case L_KEY:
-					new_bullet = { main_pj.x, 1 };
-					bullet_list.push_front(new_bullet);
-					break;
-				case H_KEY:
-					new_bullet = { main_pj.x, 0 };
-					bullet_list.push_front(new_bullet);
-					break;
+			case J_KEY:
+				if (main_pj.x > 0) {
+					main_pj.x--;
+				}
+				break;
+			case K_KEY:
+				if (main_pj.x < world_size - 1) {
+					main_pj.x++;
+				}
+				break;
+			case L_KEY:
+				new_bullet = { main_pj.x, 1 };
+				bullet_list.push_front(new_bullet);
+				break;
+			case H_KEY:
+				new_bullet = { main_pj.x, 0 };
+				bullet_list.push_front(new_bullet);
+				break;
 			}
 		}
 
@@ -114,7 +114,7 @@ int main(){
 			enemy n_enemy = { pos_n_enemy, !(rand_enemy % 2) };
 			enemy_list.push_front(n_enemy);
 		}
-		
+
 		moveEnemies(&enemy_list);
 
 		//Mushroom
@@ -122,7 +122,7 @@ int main(){
 
 		if (mush_rand == 1) {
 			int pos_n_mush = rand() % world_size - 1;
-			mushroom n_mush = { pos_n_mush, mush_points};
+			mushroom n_mush = { pos_n_mush, mush_points };
 			mush_list.push_front(n_mush);
 		}
 
@@ -146,12 +146,12 @@ int main(){
 			printf("\n\nYOU LOSE!!!!!!!!");
 		}
 		else {
-			paintWorld(main_pj, &enemy_list, &bullet_list, &mush_list, world_size);	
+			paintWorld(main_pj, &enemy_list, &bullet_list, &mush_list, world_size);
 		}
 	}
 
 	getchar();
-    return 0;
+	return 0;
 }
 
 void checkEnemyColission(std::list<enemy> *enemy_list, pj &main_pj) {
@@ -239,14 +239,14 @@ void sortMushroomList(std::list<mushroom> *mush_list) {
 }
 
 void paintWorld(pj &main_pj, std::list<enemy> *enemy_list, std::list<bullet> *bullet_list, std::list<mushroom> *mush_list, int world_size) {
-	
-	auto it_enemy  = enemy_list->begin();
-	auto it_bullet = bullet_list->begin();
-	auto it_mush   = mush_list->begin();
 
-	bool done_enemy   = it_enemy  == enemy_list->end();
-	bool done_bullet  = it_bullet == bullet_list->end();
-	bool done_mush    = it_mush   == mush_list->end();
+	auto it_enemy = enemy_list->begin();
+	auto it_bullet = bullet_list->begin();
+	auto it_mush = mush_list->begin();
+
+	bool done_enemy = it_enemy == enemy_list->end();
+	bool done_bullet = it_bullet == bullet_list->end();
+	bool done_mush = it_mush == mush_list->end();
 
 	paintWeather(world_size);
 
@@ -287,14 +287,14 @@ void paintWeather(int world_size) {
 
 	int height = 4;
 	int max_height = height + 5;
-	
+
 	for (; height < max_height; height++) {
 		consoleCursorGoToXY(0, height);
 		printf("\r");
 		printf("  ");
 		for (int j = 0; j < world_size; j++) {
-			
-			if (rand() % 2 + 1 == 1 ) {
+
+			if (rand() % 2 + 1 == 1) {
 				printf("/");
 			}
 			else {
