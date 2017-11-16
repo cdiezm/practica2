@@ -21,5 +21,9 @@ int Mushroom::getPoints() const {
 	return m_points;
 }
 
+char Mushroom::getSprite() const {
+	return m_sprite;
+}
+
 Mushroom::~Mushroom() {
 }

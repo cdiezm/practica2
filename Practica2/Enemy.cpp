@@ -2,7 +2,7 @@
 #include "Enemy.h"
 
 Enemy::Enemy() {
-	m_x = 0;
+	m_x   = 0;
 	m_dir = 0;
 }
 
@@ -25,6 +25,10 @@ int Enemy::getDir() const {
 
 void Enemy::setDir(int dir) {
 	m_dir = dir;
+}
+
+char Enemy::getSprite() const {
+	return m_sprite;
 }
 
 Enemy::~Enemy() {

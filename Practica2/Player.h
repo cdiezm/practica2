@@ -3,9 +3,10 @@
 
 class Player {
 	private:
-		int m_x;
-		int m_lives = 3;
-		int m_score = 0;
+		int  m_x;
+		int  m_lives  = 3;
+		int  m_score  = 0;
+		char m_sprite = 'X';
 
 	public:
 		Player();
@@ -16,6 +17,7 @@ class Player {
 		void setLives(int lives);
 		int getScore() const;
 		void setScore(int score);
+		char getSprite() const;
 		~Player();
 };
 

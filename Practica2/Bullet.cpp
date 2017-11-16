@@ -2,13 +2,15 @@
 #include "Bullet.h"
 
 Bullet::Bullet() {
-	m_x = 0;
-	m_dir = 0;
+	m_x      = 0;
+	m_dir    = 0;
+	m_sprite = ' ';
 }
 
 Bullet::Bullet(int x, int dir) {
-	m_x = x;
-	m_dir = dir;
+	m_x      = x;
+	m_dir    = dir;
+	m_sprite = (dir) ? '>': '<';
 }
 
 int Bullet::getX() const {
@@ -25,7 +27,17 @@ int Bullet::getDir() const {
 
 void Bullet::setDir(int dir) {
 	m_dir = dir;
+	setSprite((dir) ? '>' : '<');
+}
+
+char Bullet::getSprite() {
+	return m_sprite;
 }
 
 Bullet::~Bullet() {
+}
+
+//Private Methods
+void Bullet::setSprite(char sprite) {
+	m_sprite = sprite;
 }

@@ -33,5 +33,9 @@ void Player::setScore(int score) {
 	m_score = score;
 }
 
+char Player::getSprite() const {
+	return m_sprite;
+}
+
 Player::~Player() {
 }

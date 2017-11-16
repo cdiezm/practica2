@@ -5,6 +5,7 @@ class Mushroom {
 	private:
 		int        m_x;
 		const int  m_points = 100;
+		char       m_sprite = '*';
 
 	public:
 		Mushroom();
@@ -12,6 +13,7 @@ class Mushroom {
 		int getX() const;
 		void setX(int x);
 		int getPoints() const;
+		char getSprite() const;
 		~Mushroom();
 };
 #endif

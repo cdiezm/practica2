@@ -6,11 +6,16 @@
 #include <time.h>     
 #include <list>
 
-#define ESC_KEY 27
-#define J_KEY 'j'
-#define K_KEY 'k'
-#define L_KEY 'l'
-#define H_KEY 'h'
+#include "Bullet.h"
+#include "Enemy.h"
+#include "Mushroom.h"
+#include "Player.h"
+
+#define ESC_KEY         27
+#define LEFT_KEY        'j'
+#define RIGHT_KEY       'k'
+#define LEFT_SHOOT_KEY  'l'
+#define RIGHT_SHOOT_KEY 'h'
 
 //Entities
 struct bullet {
@@ -36,18 +41,18 @@ struct enemy {
 };
 
 //Functions Declaration
-void checkEnemyColission(std::list<enemy> *enemy_list, pj &main_pj);
-void checkMushroomColission(std::list<mushroom> *mush_list, pj &main_pj);
-void checkBulletColission(std::list<bullet> *bullet_list, std::list<enemy> *enemy_list);
-void moveBullets(std::list<bullet> *bullet_list, int world_size);
-void moveEnemies(std::list<enemy> *enemy_list);
-void sortBulletList(std::list<bullet> *bullet_list);
-void sortEnemyList(std::list<enemy> *enemy_list);
-void sortMushroomList(std::list<mushroom> *mush_list);
-void paintWorld(pj &main_pj, std::list<enemy> *enemy_list, std::list<bullet> *bullet_list, std::list<mushroom> *mush_list, int size);
-void paintWeather(int world_size);
-void consoleCursorGoToXY(int x, int y);
-void hidecursor();
+void checkEnemyColission(std::list<enemy> *enemy_list, pj &main_pj);											//World
+void checkMushroomColission(std::list<mushroom> *mush_list, pj &main_pj);										//World
+void checkBulletColission(std::list<bullet> *bullet_list, std::list<enemy> *enemy_list);						//World
+void moveBullets(std::list<bullet> *bullet_list, int world_size);												//World
+void moveEnemies(std::list<enemy> *enemy_list);																	//World	
+void sortBulletList(std::list<bullet> *bullet_list);															//World
+void sortEnemyList(std::list<enemy> *enemy_list);																//World
+void sortMushroomList(std::list<mushroom> *mush_list);															//World
+void paintWorld(pj &main_pj, std::list<enemy> *enemy_list, std::list<bullet> *bullet_list, std::list<mushroom> *mush_list, int size);		//GFX
+void paintWeather(int world_size);																											//GFX
+void consoleCursorGoToXY(int x, int y);																										//GFX
+void hidecursor();																															//GFX
 
 int main() {
 
@@ -81,21 +86,21 @@ int main() {
 		if (_kbhit()) {
 			key = _getch();
 			switch (key) {
-			case J_KEY:
+			case LEFT_KEY:
 				if (main_pj.x > 0) {
 					main_pj.x--;
 				}
 				break;
-			case K_KEY:
+			case RIGHT_KEY:
 				if (main_pj.x < world_size - 1) {
 					main_pj.x++;
 				}
 				break;
-			case L_KEY:
+			case LEFT_SHOOT_KEY:
 				new_bullet = { main_pj.x, 1 };
 				bullet_list.push_front(new_bullet);
 				break;
-			case H_KEY:
+			case RIGHT_SHOOT_KEY:
 				new_bullet = { main_pj.x, 0 };
 				bullet_list.push_front(new_bullet);
 				break;
@@ -108,6 +113,7 @@ int main() {
 		//Enemy
 		int rand_enemy = rand() % enemy_prob + 1;
 
+		//Generate Enemy
 		if (rand_enemy == 1) {
 			rand_enemy = rand() % enemy_prob + 1;
 			int pos_n_enemy = (rand_enemy % 2) ? world_size - 1 : 0;
@@ -117,7 +123,7 @@ int main() {
 
 		moveEnemies(&enemy_list);
 
-		//Mushroom
+		//Generate Mushroom
 		int mush_rand = rand() % mush_prob + 1;
 
 		if (mush_rand == 1) {
